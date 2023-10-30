@@ -17,7 +17,6 @@ import { Container, Row, Col, CloseButton } from 'react-bootstrap'; // Import th
 import Spinner from 'react-bootstrap/Spinner';
 import axios from "axios";
 import './style.css';
-import ResponsiveAppBar from './ResponsiveAppBar';
 
 const CustomToastContainer = ({ toastClassName, bodyClassName, children }) => (
   <div className={toastClassName}>
@@ -1041,9 +1040,7 @@ if(page){
   return (
     
     <Fragment>
-      <div>
-        <ResponsiveAppBar />
-      </div>
+      
 
       <ToastContainer />
       <Container>

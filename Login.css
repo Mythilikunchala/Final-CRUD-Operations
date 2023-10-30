@@ -1,24 +1,15 @@
-/* Login.css */
+/* Home.css */
 
-.login-background {
-    /* Set the background image path */
-    background-image: url('path-to-your-image.jpg');
-  
-    /* Make the background cover the full screen */
-    background-size: cover;
-  
-    /* Center the background image horizontally and vertically */
-    background-position: center center;
-  
-    /* Set a fixed background for the entire page */
-    background-attachment: fixed;
-  
-    /* Add other styles as needed, such as background color */
-    background-color: rgba(0, 0, 0, 0.5); /* Adds a semi-transparent black overlay */
-  }
-  
-  /* You can add additional styles to other page elements within the login page */
-  /* Login.css or your CSS file */
-.text-danger {
-  color: red; /* Sets the text color to red for error messages */
-}
+/* Set the background image path */
+/* html, body {
+  height: 100%;
+} */
+
+/* body {
+  /* background-image: url('C:\\Users\\Adeptpros\\Downloads\\EMS.jpg');
+  background-size: auto 50%;
+  background-position: top left;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-repeat: no-repeat;  
+} */

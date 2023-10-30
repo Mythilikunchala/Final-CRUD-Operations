@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import ResponsiveAppBar from './ResponsiveAppBar';
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -34,6 +34,7 @@ function Login() {
                 const isAuthenticated = response.data;
                 debugger;
                 if (isAuthenticated) {
+                    console.log("hi");
                     debugger;
                     // Authentication succeeded, navigate to the CRUD component
                     navigate('/CRUD');
@@ -51,7 +52,11 @@ function Login() {
     }
 
     return (
+        
+        
         <div className="bg">
+            <ResponsiveAppBar />
+            
             <h1><font color="yellow" align="center">EMPLOYEE MANAGEMENT SYSTEM</font></h1>
             <div className="border w-25 mt-5 m-auto p-3">
                 
@@ -76,6 +81,10 @@ function Login() {
                 </div>
                 <div className="mt-1">
                     {loginError && <div className="text-danger">{loginError}</div>}
+
+
+
+
                 </div>
                 <div className="mt-3">
                     <button className="btn btn-primary w-100" onClick={handleSubmit}>
