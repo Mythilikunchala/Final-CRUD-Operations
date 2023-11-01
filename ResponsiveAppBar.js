@@ -9,23 +9,27 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';    
+import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const pages = ['ABOUTUS', 'CONTACT', 'LOGIN']; // Change tab labels
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['ABOUTUS', 'SERVICES', 'CONTACTUS', 'LOGIN']; // Change tab labels
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElServices, setAnchorElServices] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenServicesMenu = (event) => {
+    setAnchorElServices(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -36,29 +40,50 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
+  const handleCloseServicesMenu = (event, section) => {
+    event.preventDefault(); // Prevent the default link behavior
+    setAnchorElServices(null); // Close the dropdown
+    scrollToSection(section); // Scroll to the selected section
+  };
 
+  const scrollToSection = (section) => {
+    const targetElement = document.getElementById(section);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <Box sx={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+      <AppBar position="static" sx={{ height: '64px' }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              <img
+                src="/images/adeptpros.png" // Replace with the actual path to your image
+                alt="Logo"
+                width="300" // Set a fixed width and height
+                height="50"
+                style={{
+                 
+                  objectFit: 'cover', // Add this to make the image fit within the fixed size
+                }}
+              />
+            </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <IconButton
               size="large"
@@ -112,29 +137,104 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Logo
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-            {pages.map((page, index) => (
-              <Button
-                key={page}
-                component={Link} // Use the Link component for navigation
-                to={`/${page.toLowerCase()}`} // Example: "/login"
-                sx={{
-                  my: 2, // Add margin on the y-axis (top and bottom)
-                  mx: 2, // Add margin on the x-axis (left and right)
-                  color: 'white',
-                }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              component={Link}
+              to="/SERVICES"
+              sx={{
+                my: 2,
+                mx: 2,
+                color: 'white',
+              }}
+              onClick={handleOpenServicesMenu}
+            >
+              SERVICES
+            </Button>
+            <Button
+              component={Link}
+              to="/ABOUTUS"
+              sx={{
+                my: 2,
+                mx: 2,
+                color: 'white',
+              }}
+            >
+              ABOUT US
+            </Button>
+            <Button
+              component={Link}
+              to="/CONTACTUS"
+              sx={{
+                my: 2,
+                mx: 2,
+                color: 'white',
+              }}
+            >
+              CONTACT US
+            </Button>
+            <Button
+              component={Link}
+              to="/LOGIN"
+              sx={{
+                my: 2,
+                mx: 2,
+                color: 'white',
+              }}
+            >
+              LOGIN
+            </Button>
+            <Menu
+  anchorEl={anchorElServices}
+  keepMounted
+  open={Boolean(anchorElServices)}
+  onClose={handleCloseServicesMenu}
+  sx={{
+    marginTop: '45px',
+  }}
+>
+  <MenuItem
+    component={Link}
+    to="#strategy"
+    onClick={(event) => handleCloseServicesMenu(event, 'strategy')}
+  >
+    Strategy
+  </MenuItem>
+  <MenuItem
+    component={Link}
+    to="#design"
+    onClick={(event) => handleCloseServicesMenu(event, 'design')}
+  >
+    Design
+  </MenuItem>
+  <MenuItem
+    component={Link}
+    to="#development"
+    onClick={(event) => handleCloseServicesMenu(event, 'development')}
+  >
+    Development
+  </MenuItem>
+  <MenuItem
+    component={Link}
+    to="#testing"
+    onClick={(event) => handleCloseServicesMenu(event, 'testing')}
+  >
+    Testing
+  </MenuItem>
+</Menu>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/images/adeptpros.png" sx={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: '50%',
+                }}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -152,17 +252,13 @@ function ResponsiveAppBar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            />
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+    </Box>
   );
 }
+
 export default ResponsiveAppBar;
